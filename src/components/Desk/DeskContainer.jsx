@@ -3,7 +3,7 @@ import Desk from './Desk'
 
 const DeskContainer = (props) => {
     return (
-        <Desk />
+        <Desk {...props}/>
     )
 }
 
