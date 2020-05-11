@@ -1,4 +1,4 @@
-import {ADD_DESK, REMOVE_DESK, ADD_TARGET} from './actionsTypes';
+import {ADD_DESK, REMOVE_DESK, ADD_TARGET, REMOVE_TARGET} from './actionsTypes';
 import randomId from '../helpers/idCreator/idCreator';
 
 const initialState = {
@@ -29,21 +29,35 @@ const appReducer = (state = initialState, action) => {
         case ADD_TARGET: {
             const newTarget = {
                 id: randomId()
-            }
+            };
 
-            if (state.desks.map((d)=> {return (d.id !== action.deskId)})) {
-                return ({
-                    ...state
-                })
-            } else {
-                return ({
+            return {
+                    ...state,
+                    desks: state.desks.map(desk => {
+                       if(desk.id === action.deskId) {
+                        return {
+                            ...desk,
+                            targets: [...desk.targets, newTarget]
+                          }
+                       } 
+                        return desk;
+                      })
+                    }
+         }
+        case REMOVE_TARGET: {
+            return ({
                 ...state,
-                ...state.desks,
-                //fix it !!!
-                desks: state.desks.map((d) => d.targets.newTarget = newTarget)
-            })}
+                desks: state.desks.map((d)=> {if (d.id === action.deskId) {
+                    return {
+                        ...d,
+                        targets: [d.targets.filter(t=> t.id !== action.targetId)]
+                    }
+                } return d})
+            })
         }
-        default: return state;
+        default: {
+            return {...state}
+        }
     }
 };
 
@@ -57,6 +71,10 @@ export const deleteDesk = (deskId) => {
 
 export const addTarget = (deskId) => {
     return ({type: ADD_TARGET, deskId})
+}
+
+export const deleteTarget = (deskId, targetId) => {
+    return ({type: REMOVE_TARGET, deskId, targetId})
 }
 
 export default appReducer;
