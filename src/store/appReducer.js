@@ -50,7 +50,7 @@ const appReducer = (state = initialState, action) => {
                 desks: state.desks.map((d)=> {if (d.id === action.deskId) {
                     return {
                         ...d,
-                        targets: [d.targets.filter(t=> t.id !== action.targetId)]
+                        targets: [...d.targets.filter((t)=>{return(t.id !== action.targetId)})]
                     }
                 } return d})
             })
