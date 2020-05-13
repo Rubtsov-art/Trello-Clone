@@ -1,10 +1,12 @@
-import {ADD_DESK, REMOVE_DESK, ADD_TARGET, REMOVE_TARGET} from './actionsTypes';
+import {ADD_DESK, REMOVE_DESK, ADD_TARGET, REMOVE_TARGET, ADD_TASK} from './actionsTypes';
 import randomId from '../helpers/idCreator/idCreator';
 
 const initialState = {
     desks: [{
         id: randomId(),
-        targets: []
+        targets: [{
+            tasks:[]
+        }]
     }]
 }
 
@@ -28,7 +30,8 @@ const appReducer = (state = initialState, action) => {
         }
         case ADD_TARGET: {
             const newTarget = {
-                id: randomId()
+                id: randomId(),
+                tasks: []
             };
 
             return {
@@ -55,6 +58,29 @@ const appReducer = (state = initialState, action) => {
                 } return d})
             })
         }
+        case ADD_TASK: {
+            const newTask = {
+                id: randomId()
+            }
+
+            return ({
+                ...state,
+                desks: state.desks.map((d)=> {if (d.id === action.deskId) {
+                    return {
+                        ...d,
+                        targets: d.targets.map((t) => {if (t.id === action.targetId) {
+                            return {
+                                ...t,
+                                tasks: [...t.tasks, newTask]
+                            }
+                        }
+                            return t
+                        
+                       })
+                    }
+                } return d})
+            })
+        }
         default: {
             return {...state}
         }
@@ -75,6 +101,10 @@ export const addTarget = (deskId) => {
 
 export const deleteTarget = (deskId, targetId) => {
     return ({type: REMOVE_TARGET, deskId, targetId})
+}
+
+export const addTask = (deskId, targetId) => {
+    return ({type: ADD_TASK, deskId, targetId})
 }
 
 export default appReducer;

@@ -6,7 +6,7 @@ const Desk = (props) => {
         <li>
             <button onClick={()=>{props.addTarget(props.deskId)}}>add target</button>
             <ul>
-                {props.desks.map(d=> d.id === props.deskId && d.targets.map(t=> <Target key={t.id} targetId={t.id} deskId={props.deskId} deleteTarget={props.deleteTarget}/>))}
+                {props.desks.map(d=> d.id === props.deskId && d.targets.map(t=> <Target key={t.id} targetId={t.id} deskId={props.deskId} deleteTarget={props.deleteTarget} addTask={props.addTask}/>))}
             </ul>
             <button onClick={()=>{props.deleteDesk(props.deskId)}}>delete desk</button>
         </li>
