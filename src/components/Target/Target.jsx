@@ -13,8 +13,18 @@ const Target = (props) => {
         setEditMode(false)
     };
 
+    const onTargetNameChange = (e) => {
+        props.setTargetName(e.currentTarget.value, props.deskId, props.targetId)
+    };
+
     return (
         <li>
+            {editMode 
+            ?  <input onChange={onTargetNameChange} value={props.targetName} type={'text'} autoFocus={true} onBlur={editModeOff}/>
+            : <div>
+                <h2>{props.targetName}</h2>
+                <button onClick={()=>{editModeOn()}}>edit</button>
+              </div>}
             <div>Target name</div>
             <ul>
                 {props.desks.map((d)=> d.id===props.deskId && d.targets.map((t) => t.id === props.targetId && t.tasks.map((task) => <Task key={task.id} taskId={task.id} deskId={props.deskId} targetId={props.targetId} deleteTask={props.deleteTask}/>)))}
