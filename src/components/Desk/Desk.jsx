@@ -3,7 +3,7 @@ import Target from '../Target/Target';
 
 const Desk = (props) => {
 
-    const [editMode, setEditMode] = useState(false);
+    const [editMode, setEditMode] = useState(true);
 
     const editModeOn = () => {
         setEditMode(true)
@@ -29,7 +29,7 @@ const Desk = (props) => {
             <li>
                 <button onClick={() => { props.addTarget(props.deskId) }}>add target</button>
                 <ul>
-                    {props.desks.map(d => d.id === props.deskId && d.targets.map(t => <Target key={t.id} targetId={t.id} targetName={t.targetName} deskId={props.deskId} deleteTarget={props.deleteTarget} addTask={props.addTask} desks={props.desks} deleteTask={props.deleteTask} setTargetName={props.setTargetName} setTaskName={props.setTaskName}/>))}
+                    {props.desks.map(d => d.id === props.deskId && d.targets.map(t => <Target key={t.id} targetId={t.id} targetName={t.targetName} deskId={props.deskId} deleteTarget={props.deleteTarget} addTask={props.addTask} desks={props.desks} deleteTask={props.deleteTask} setTargetName={props.setTargetName} setTaskName={props.setTaskName} setTaskText={props.setTaskText}/>))}
                 </ul>
                 <button onClick={() => { props.deleteDesk(props.deskId) }}>delete desk</button>
             </li>
