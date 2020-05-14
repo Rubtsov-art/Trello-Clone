@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Task from '../Task/Task';
 
 const Target = (props) => {
+
+    const [editMode, setEditMode] = useState(false);
+
+    const editModeOn = () => {
+        setEditMode(true)
+    };
+
+    const editModeOff = () => {
+        setEditMode(false)
+    };
+
     return (
         <li>
             <div>Target name</div>

@@ -1,8 +1,9 @@
-import {ADD_DESK, REMOVE_DESK, ADD_TARGET, REMOVE_TARGET, ADD_TASK, REMOVE_TASK} from './actionsTypes';
+import {ADD_DESK, REMOVE_DESK, ADD_TARGET, REMOVE_TARGET, ADD_TASK, REMOVE_TASK, SET_DESK_NAME} from './actionsTypes';
 import randomId from '../helpers/idCreator/idCreator';
 
 const initialState = {
     desks: [{
+        deskName: 'New Desk',
         id: randomId(),
         targets: [{
             id: randomId(),
@@ -17,6 +18,7 @@ const appReducer = (state = initialState, action) => {
     switch(action.type) {
         case ADD_DESK: {
             const newDesk = {
+                             deskName: 'New Desk',
                              id: randomId(),
                              targets: []
                             }
@@ -100,6 +102,17 @@ const appReducer = (state = initialState, action) => {
                 } return d})
             })
         }
+        case SET_DESK_NAME: {
+            return {
+                ...state,
+                desks: state.desks.map((d) => {if (d.id === action.deskId){
+                    return {
+                        ...d,
+                        deskName: action.value
+                    }
+                }return d})
+            }
+        }
         default: {
             return {...state}
         }
@@ -128,6 +141,10 @@ export const addTask = (deskId, targetId) => {
 
 export const deleteTask = (deskId, targetId, taskId) => {
     return ({type: REMOVE_TASK, deskId, targetId, taskId})
+}
+
+export const setDeskName = (value, deskId) => {
+    return ({type: SET_DESK_NAME, value, deskId})
 }
 
 export default appReducer;
