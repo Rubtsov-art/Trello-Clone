@@ -12,9 +12,18 @@ const Task = (props) => {
         setEditMode(false)
     };
 
+    const onTaskNameChange = (e) => {
+        props.setTaskName(e.currentTarget.value, props.deskId, props.targetId, props.taskId)
+    };
+
     return (
         <li>
-            <div>TaskNAME</div>
+             {editMode 
+            ?  <input onChange={onTaskNameChange} value={props.taskName} type={'text'} autoFocus={true} onBlur={editModeOff}/>
+            : <div>
+                <h3>{props.taskName}</h3>
+                <button onClick={()=>{editModeOn()}}>edit</button>
+              </div>}
             123
             <button onClick={()=>{props.deleteTask(props.deskId, props.targetId, props.taskId)}}>deleteTask</button>
         </li>

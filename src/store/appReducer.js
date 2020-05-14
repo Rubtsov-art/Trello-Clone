@@ -1,4 +1,4 @@
-import {ADD_DESK, REMOVE_DESK, ADD_TARGET, REMOVE_TARGET, ADD_TASK, REMOVE_TASK, SET_DESK_NAME, SET_TARGET_NAME} from './actionsTypes';
+import {ADD_DESK, REMOVE_DESK, ADD_TARGET, REMOVE_TARGET, ADD_TASK, REMOVE_TASK, SET_DESK_NAME, SET_TARGET_NAME, SET_TASK_NAME} from './actionsTypes';
 import randomId from '../helpers/idCreator/idCreator';
 
 const initialState = {
@@ -9,6 +9,7 @@ const initialState = {
             targetName: 'New Target',
             id: randomId(),
             tasks:[{
+                taskName: 'New Task',
                 id: randomId(),
             }]
         }]
@@ -67,6 +68,7 @@ const appReducer = (state = initialState, action) => {
         }
         case ADD_TASK: {
             const newTask = {
+                taskName: 'New Task',
                 id: randomId()
             }
 
@@ -131,6 +133,27 @@ const appReducer = (state = initialState, action) => {
                 }return d})
             }
         }
+        case SET_TASK_NAME: {
+            return {
+                ...state,
+                desks: state.desks.map((d) => {if (d.id === action.deskId){
+                    return {
+                        ...d,
+                        targets: d.targets.map((t)=> {if (t.id === action.targetId){
+                            return {
+                                ...t,
+                                tasks: t.tasks.map((task) => {if (task.id === action.taskId){
+                                    return {
+                                        ...task,
+                                        taskName: action.value
+                                    }
+                                }return task})
+                            }
+                        }return t})
+                    }
+                }return d})
+            }
+        }
         default: {
             return {...state}
         }
@@ -167,6 +190,10 @@ export const setDeskName = (value, deskId) => {
 
 export const setTargetName = (value, deskId, targetId) => {
     return ({type: SET_TARGET_NAME, value, deskId, targetId})
+}
+
+export const setTaskName = (value, deskId, targetId, taskId) => {
+    return ({type: SET_TASK_NAME, value, deskId, targetId,taskId})
 }
 
 export default appReducer;

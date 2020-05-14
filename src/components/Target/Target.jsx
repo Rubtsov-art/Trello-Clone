@@ -27,7 +27,7 @@ const Target = (props) => {
               </div>}
             <div>Target name</div>
             <ul>
-                {props.desks.map((d)=> d.id===props.deskId && d.targets.map((t) => t.id === props.targetId && t.tasks.map((task) => <Task key={task.id} taskId={task.id} deskId={props.deskId} targetId={props.targetId} deleteTask={props.deleteTask}/>)))}
+                {props.desks.map((d)=> d.id===props.deskId && d.targets.map((t) => t.id === props.targetId && t.tasks.map((task) => <Task key={task.id} taskId={task.id} deskId={props.deskId} targetId={props.targetId} deleteTask={props.deleteTask} setTaskName={props.setTaskName} taskName={task.taskName}/>)))}
             </ul>
             <button onClick={()=>{props.addTask(props.deskId, props.targetId)}}>addTASK</button>
             <button onClick={()=>{props.deleteTarget(props.deskId, props.targetId)}}>delete target</button>
