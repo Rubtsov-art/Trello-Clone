@@ -1,0 +1,29 @@
+.desk {
+    margin: 20px 30px;
+    padding: 0px;
+    width: 250px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.nameWrapper {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: green;
+}
+
+.deskName {
+    font-family: Roboto, sans-serif;
+    font-size: 26px;
+    font-weight: 500;
+    display: inline-block;
+    max-width: 180px;
+    overflow-wrap: break-word;
+}
+
+.targets {
+    list-style: none;
+}

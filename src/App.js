@@ -10,10 +10,12 @@ function App(props) {
   return (
     <div className="App">
       <Header />
+      <div className='container'>
       <ul className='deskList'>
         {props.desks.map((d) => {return (<DeskContainer key={d.id} deskId={d.id} deskName={d.deskName} deleteDesk={props.deleteDesk} addTarget={props.addTarget} deleteTarget={props.deleteTarget} desks={props.desks} addTask={props.addTask} deleteTask={props.deleteTask} setDeskName={props.setDeskName} setTargetName={props.setTargetName} setTaskName={props.setTaskName} setTaskText={props.setTaskText}/>)})}
       </ul>
       <button onClick={props.addDesk}>add</button>
+      </div>
     </div>
   );
 }
