@@ -3,7 +3,7 @@ import './App.css';
 import {addDesk, deleteDesk, addTarget, deleteTarget, addTask, deleteTask, setDeskName, setTargetName, setTaskName, setTaskText, moveTarget} from './store/appReducer';
 import { connect } from 'react-redux';
 import Header from './components/Header/Header';
-import DeskContainer from './components/Desk/DeskContainer';
+import Desk from './components/Desk/Desk';
 
 function App(props) {
 
@@ -12,7 +12,7 @@ function App(props) {
       <Header />
       <div className='container'>
       <ul className='deskList'>
-        {props.desks.map((d) => {return (<DeskContainer key={d.id} deskId={d.id} deskName={d.deskName} deleteDesk={props.deleteDesk} addTarget={props.addTarget} deleteTarget={props.deleteTarget} desks={props.desks} addTask={props.addTask} deleteTask={props.deleteTask} setDeskName={props.setDeskName} setTargetName={props.setTargetName} setTaskName={props.setTaskName} setTaskText={props.setTaskText} moveTarget={props.moveTarget}/>)})}
+        {props.desks.map((d) => {return (<Desk key={d.id} deskId={d.id} deskName={d.deskName} deleteDesk={props.deleteDesk} addTarget={props.addTarget} deleteTarget={props.deleteTarget} desks={props.desks} addTask={props.addTask} deleteTask={props.deleteTask} setDeskName={props.setDeskName} setTargetName={props.setTargetName} setTaskName={props.setTaskName} setTaskText={props.setTaskText} moveTarget={props.moveTarget}/>)})}
       </ul>
       <button onClick={props.addDesk}>add</button>
       </div>

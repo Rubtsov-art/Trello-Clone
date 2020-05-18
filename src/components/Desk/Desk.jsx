@@ -5,6 +5,7 @@ import Target from '../Target/Target';
 const Desk = (props) => {
 
     const [editMode, setEditMode] = useState(true);
+   
 
     const editModeOn = () => {
         setEditMode(true)
