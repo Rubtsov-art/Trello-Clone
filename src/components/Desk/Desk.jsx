@@ -18,12 +18,12 @@ const Desk = (props) => {
         props.setDeskName(e.currentTarget.value, props.deskId)
     };
 
-    const dropHandler = (evt, targetId) => {
+    const dropHandler = (evt) => {
         evt.preventDefault()
   
-        const [recivedTask, recivedList] = evt.dataTransfer.getData('targetId,deskId').split(',')
+        const [targetId, currentDeskId] = evt.dataTransfer.getData('targetId,deskId').split(',')
         
-        props.moveTarget(Number(recivedTask), Number(recivedList), props.deskId, props.id)
+        props.moveTarget(Number(targetId), Number(currentDeskId), props.deskId)
     }
 
     return (
@@ -36,12 +36,12 @@ const Desk = (props) => {
               </div>}
             <li>
                 <button onClick={() => { props.addTarget(props.deskId) }}>add target</button>
+                <div onDrop={(evt) => dropHandler(evt)} onDragOver={(evt) => evt.preventDefault()}>
                 <ul className={style.targets}>
                     {props.desks.map(d => {
                         return (
                         d.id === props.deskId && d.targets.map(t => {
                         return (
-                        <div onDrop={(evt) => dropHandler(evt, t.id)} onDragOver={(evt) => evt.preventDefault()} key={t.id}>
                         <Target 
                             key={t.id} 
                             targetId={t.id}
@@ -54,10 +54,11 @@ const Desk = (props) => {
                              setTargetName={props.setTargetName} 
                              setTaskName={props.setTaskName} 
                              setTaskText={props.setTaskText}/>
-                        </div>
+                       
                         )})
                     )})}
                 </ul>
+                </div>
                 <button onClick={() => { props.deleteDesk(props.deskId) }}>delete desk</button>
             </li>
         </section>

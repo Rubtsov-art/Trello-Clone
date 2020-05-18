@@ -8,3 +8,4 @@ export const SET_DESK_NAME = 'SET_DESK_NAME';
 export const SET_TARGET_NAME = 'SET_TARGET_NAME';
 export const SET_TASK_NAME = 'SET_TASK_NAME';
 export const SET_TASK_TEXT = 'SET_TASK_TEXT';
+export const MOVE_TARGET = 'MOVE_TARGET';

@@ -1,4 +1,4 @@
-import {ADD_DESK, REMOVE_DESK, ADD_TARGET, REMOVE_TARGET, ADD_TASK, REMOVE_TASK, SET_DESK_NAME, SET_TARGET_NAME, SET_TASK_NAME, SET_TASK_TEXT} from './actionsTypes';
+import {ADD_DESK, REMOVE_DESK, ADD_TARGET, REMOVE_TARGET, ADD_TASK, REMOVE_TASK, SET_DESK_NAME, SET_TARGET_NAME, SET_TASK_NAME, SET_TASK_TEXT, MOVE_TARGET} from './actionsTypes';
 import randomId from '../helpers/idCreator/idCreator';
 
 const initialState = {
@@ -177,6 +177,30 @@ const appReducer = (state = initialState, action) => {
                 }return d})
             }
         }
+        case MOVE_TARGET: {
+
+            const prevDesk = {...state.desks.find(desk => desk.id === action.prevDeskId)};
+            const currentTarget = {...prevDesk.targets.find(target => target.id === action.targetId)};
+            const oldTargetsList = [...prevDesk.targets.filter(target => target.id !== action.targetId)];
+
+            return {
+                ...state,
+                desks: state.desks.map((desk) => {
+                    if (desk.id === action.prevDeskId) {
+                        return {
+                            ...desk,
+                            targets: oldTargetsList
+                        } 
+                    } else if (desk.id === action.deskId) {
+                        return {
+                            ...desk,
+                            targets: [...desk.targets, currentTarget]
+                        }
+                    }
+                return desk;
+                })
+            }
+        }
         default: {
             return {...state}
         }
@@ -221,6 +245,10 @@ export const setTaskName = (value, deskId, targetId, taskId) => {
 
 export const setTaskText = (value, deskId, targetId, taskId) => {
     return ({type: SET_TASK_TEXT, value, deskId, targetId, taskId})
+}
+
+export const moveTarget = (targetId, prevDeskId, deskId) => {
+    return ({type: MOVE_TARGET, targetId, prevDeskId, deskId})
 }
 
 export default appReducer;

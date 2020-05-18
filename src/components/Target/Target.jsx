@@ -19,7 +19,7 @@ const Target = (props) => {
     };
 
     const startDragHandler = (evt, id) => {
-        evt.dataTransfer.setData('targetId,deskId', `${props.id},${props.deskId}`)
+        evt.dataTransfer.setData('targetId,deskId', `${props.targetId},${props.deskId}`)
       }
 
     return (
