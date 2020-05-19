@@ -30,8 +30,17 @@ const Desk = (props) => {
     return (
         <section className={style.desk}>
             {editMode 
-            ?  <div className={style.nameWrapper}><input onChange={onDeskNameChange} value={props.deskName} type={'text'} autoFocus={true} onBlur={editModeOff}/></div>
-            : <div className={style.nameWrapper}>
+            ?        <div class="row #ff6d00 orange accent-4">
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input onChange={onDeskNameChange} value={props.deskName} autoFocus={true} onBlur={editModeOff} type={"text"} id={"autocomplete-input"} class={"autocomplete"}/>
+                                    <label class='black-text' for="autocomplete-input">Desk name</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            : <div class='#ff6d00 orange accent-4'>
                 <h1 className={style.deskName}>{props.deskName}</h1>
                 <button onClick={()=>{editModeOn()}}>edit</button>
               </div>}
@@ -60,7 +69,7 @@ const Desk = (props) => {
                     )})}
                 </ul>
                 </div>
-                <button onClick={() => { props.deleteDesk(props.deskId) }}>delete desk</button>
+                <button className={style.deleteDesk} onClick={() => { props.deleteDesk(props.deskId) }}><a class="waves-effect waves-light btn-small #ff6d00 orange accent-4">delete desk</a></button>
             </li>
         </section>
     )

@@ -27,3 +27,8 @@
 .targets {
     list-style: none;
 }
+
+.deleteDesk {
+    border: none;
+    background: none;
+}

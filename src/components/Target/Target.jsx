@@ -20,21 +20,35 @@ const Target = (props) => {
 
     const startDragHandler = (evt, id) => {
         evt.dataTransfer.setData('targetId,deskId', `${props.targetId},${props.deskId}`)
-      }
+    }
 
     return (
         <li draggable="true" onDragStart={(evt) => startDragHandler(evt, props.id)} className={style.target}>
-            {editMode 
-            ?  <input onChange={onTargetNameChange} value={props.targetName} type={'text'} autoFocus={true} onBlur={editModeOff}/>
-            : <div>
-                <h2>{props.targetName}</h2>
-                <button onClick={()=>{editModeOn()}}>edit</button>
-              </div>}
+            {editMode
+                ? <input onChange={onTargetNameChange} value={props.targetName} type={'text'} autoFocus={true} onBlur={editModeOff} />
+                : <div>
+                    <h2>{props.targetName}</h2>
+                    <button onClick={() => { editModeOn() }}>edit</button>
+                </div>}
             <ul className={style.tasks}>
-                {props.desks.map((d)=> d.id===props.deskId && d.targets.map((t) => t.id === props.targetId && t.tasks.map((task) => <Task key={task.id} taskId={task.id} deskId={props.deskId} targetId={props.targetId} deleteTask={props.deleteTask} setTaskName={props.setTaskName} taskName={task.taskName} taskText={task.taskText} setTaskText={props.setTaskText}/>)))}
+                {props.desks.map((d) => d.id === props.deskId && d.targets.map((t) => t.id === props.targetId && t.tasks.map((task) => {
+                    return (
+                        <Task
+                            key={task.id}
+                            taskId={task.id}
+                            deskId={props.deskId}
+                            targetId={props.targetId}
+                            deleteTask={props.deleteTask}
+                            setTaskName={props.setTaskName}
+                            taskName={task.taskName}
+                            taskText={task.taskText}
+                            setTaskText={props.setTaskText}
+                        />)
+                }
+                )))}
             </ul>
-            <button onClick={()=>{props.addTask(props.deskId, props.targetId)}}>addTASK</button>
-            <button onClick={()=>{props.deleteTarget(props.deskId, props.targetId)}}>delete target</button>
+            <button onClick={() => { props.addTask(props.deskId, props.targetId) }}>addTASK</button>
+            <button onClick={() => { props.deleteTarget(props.deskId, props.targetId) }}>delete target</button>
         </li>
     )
 };
