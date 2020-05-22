@@ -1,18 +1,11 @@
 .desk {
     margin: 20px 30px;
     padding: 0px;
-    width: 250px;
+    width: 300px;
+    min-height: 100px;
     text-align: center;
     border: 1px solid black;
-}
-
-.nameWrapper {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: green;
+    box-shadow: -1px 2px 28px -3px rgba(34, 60, 80, 0.26);
 }
 
 .deskName {
@@ -28,7 +21,31 @@
     list-style: none;
 }
 
+.addTarget {
+    border: none;
+    background: none;
+}
+
 .deleteDesk {
     border: none;
     background: none;
+}
+
+.deskNameEdit {
+    min-width: 30px;
+    min-height: 30px;
+    margin-left: 10px;
+    border-radius: 50%;
+    border: 2px solid black;
+    background-color: #76ff03;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 15px;
+    background-image: url('../../assets/pen.png');
+    cursor: pointer;
+    
+}
+
+.editSpan {
+    font-size: 0;
 }

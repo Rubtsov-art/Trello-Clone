@@ -4,7 +4,7 @@ import Target from '../Target/Target';
 
 const Desk = (props) => {
 
-    const [editMode, setEditMode] = useState(true);
+    const [editMode, setEditMode] = useState(false);
    
 
     const editModeOn = () => {
@@ -30,7 +30,7 @@ const Desk = (props) => {
     return (
         <section className={style.desk}>
             {editMode 
-            ?        <div class="row #ff6d00 orange accent-4">
+            ?        <div class="row #e6ee9c lime lighten-3">
                         <div class="col s12">
                             <div class="row">
                                 <div class="input-field col s12">
@@ -40,12 +40,12 @@ const Desk = (props) => {
                             </div>
                         </div>
                     </div>
-            : <div class='#ff6d00 orange accent-4'>
+            : <div class='#e6ee9c lime lighten-3'>
                 <h1 className={style.deskName}>{props.deskName}</h1>
-                <button onClick={()=>{editModeOn()}}>edit</button>
+                <button className={style.deskNameEdit} onClick={()=>{editModeOn()}} aria-label='edit'><span className={style.editSpan}>edit</span></button>
               </div>}
             <li>
-                <button onClick={() => { props.addTarget(props.deskId) }}>add target</button>
+                <button className={style.addTarget} onClick={() => { props.addTarget(props.deskId) }}><a class="waves-effect waves-light btn-small #558b2f light-green darken-3">add target</a></button>
                 <div onDrop={(evt) => dropHandler(evt)} onDragOver={(evt) => evt.preventDefault()}>
                 <ul className={style.targets}>
                     {props.desks.map(d => {

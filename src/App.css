@@ -1,4 +1,10 @@
+.App {
+    display: grid;
+    grid-template-rows: 0.3fr 1fr;
+}
+
 .container {
+ margin-top: 70px;
  display: flex;
  flex-direction: row;
 }
@@ -7,4 +13,13 @@
     list-style: none;
     display: flex;
     flex-direction: row;
+}
+
+.addDesk {
+    margin-top: -40px;
+    margin-left: 850px;
+    position: fixed;
+    border: none;
+    background: none;
+    z-index: 3;
 }

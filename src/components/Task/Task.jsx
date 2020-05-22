@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import style from './Task.module.css';
 
 const Task = (props) => {
 
-    const [editMode, setEditMode] = useState(true);
-    const [editText, setEditText] = useState(true);
+    const [editMode, setEditMode] = useState(false);
+    const [editText, setEditText] = useState(false);
 
     const editModeOn = () => {
         setEditMode(true)
@@ -30,21 +31,22 @@ const Task = (props) => {
     };
 
     return (
-        <li>
-             {editMode 
-            ?  <input onChange={onTaskNameChange} value={props.taskName} type={'text'} autoFocus={true} onBlur={editModeOff}/>
-            : <div>
-                <h3>{props.taskName}</h3>
-                <button onClick={()=>{editModeOn()}}>edit</button>
-              </div>}
+        <li className={style.task}>
+            {editMode
+                ? <input onChange={onTaskNameChange} value={props.taskName} type={'text'} autoFocus={true} onBlur={editModeOff} />
+                : <div className={style.taskNameWrapper}>
+                    <h3 className={style.taskName}>{props.taskName}</h3>
+                    <button className={style.taskNameEdit} onClick={() => { editModeOn() }} aria-label='edit task name'><span className={style.editSpan}>edit</span></button>
+                    <button className={style.deleteTask} onClick={() => { props.deleteTask(props.deskId, props.targetId, props.taskId) }} aria-label='delete task'>X</button>
+                </div>}
             {editText
-            ? <input onChange={onTaskTextChange} value={props.taskText} type={'text'} autoFocus={true} onBlur={textComplete}/>
-            : <div>
-                <p>{props.taskText}</p>
-                <button onClick={textInEdit}>edit text</button>
-              </div>
+                ? <input onChange={onTaskTextChange} value={props.taskText} type={'text'} autoFocus={true} onBlur={textComplete} />
+                : <div className={style.textWrapper}>
+                    <p>{props.taskText}</p>
+                    <button className={style.editText} onClick={textInEdit} aria-label='edit task text'><span className={style.editSpan}>edit</span></button>
+                 </div>
             }
-            <button onClick={()=>{props.deleteTask(props.deskId, props.targetId, props.taskId)}}>deleteTask</button>
+            
         </li>
     )
 }

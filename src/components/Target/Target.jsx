@@ -4,7 +4,7 @@ import Task from '../Task/Task';
 
 const Target = (props) => {
 
-    const [editMode, setEditMode] = useState(true);
+    const [editMode, setEditMode] = useState(false);
 
     const editModeOn = () => {
         setEditMode(true)
@@ -25,10 +25,23 @@ const Target = (props) => {
     return (
         <li draggable="true" onDragStart={(evt) => startDragHandler(evt, props.id)} className={style.target}>
             {editMode
-                ? <input onChange={onTargetNameChange} value={props.targetName} type={'text'} autoFocus={true} onBlur={editModeOff} />
-                : <div>
-                    <h2>{props.targetName}</h2>
-                    <button onClick={() => { editModeOn() }}>edit</button>
+                ?
+                
+                <div class="row #afb42b lime darken-2">
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input onChange={onTargetNameChange} value={props.targetName} type={'text'} autoFocus={true} onBlur={editModeOff} type={"text"} id={"autocomplete-input"} class={"autocomplete"}/>
+                                    <label class='black-text' for="autocomplete-input">Target name</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                : <div className={style.nameWrapper}>
+                    <h2 className={style.targetName}>{props.targetName}</h2>
+                    <button className={style.targetNameEdit} onClick={() => { editModeOn() }} aria-label='edit target name'><span className={style.editSpan}>edit</span></button>
+                    <button className={style.deleteTarget} onClick={() => { props.deleteTarget(props.deskId, props.targetId) }} aria-label='delete target'>X</button>
                 </div>}
             <ul className={style.tasks}>
                 {props.desks.map((d) => d.id === props.deskId && d.targets.map((t) => t.id === props.targetId && t.tasks.map((task) => {
@@ -47,8 +60,8 @@ const Target = (props) => {
                 }
                 )))}
             </ul>
-            <button onClick={() => { props.addTask(props.deskId, props.targetId) }}>addTASK</button>
-            <button onClick={() => { props.deleteTarget(props.deskId, props.targetId) }}>delete target</button>
+            <button className={style.addTarget} onClick={() => { props.addTask(props.deskId, props.targetId) }}><a class="waves-effect waves-light btn-small #558b2f light-green darken-3">ADD TASK</a></button>
+            
         </li>
     )
 };

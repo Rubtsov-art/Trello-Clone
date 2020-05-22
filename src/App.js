@@ -14,7 +14,7 @@ function App(props) {
         <ul className='deskList'>
           {props.desks.map((d) => {
             return (
-              <Desk
+              <Desk 
                 key={d.id}
                 deskId={d.id}
                 deskName={d.deskName}
@@ -32,7 +32,7 @@ function App(props) {
               />)
           })}
         </ul>
-        <button onClick={props.addDesk}>add</button>
+        <button className='addDesk' onClick={props.addDesk}><a class="waves-effect waves-light btn-small #558b2f light-green darken-3">add desk</a></button>
       </div>
     </div>
   );

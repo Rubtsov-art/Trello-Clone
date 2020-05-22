@@ -4,7 +4,7 @@ import style from './Header.module.css'
 const Header = (props) => {
     return (
         <section className={style.header}>
-            <span><b>TRELLO</b></span>
+            <h1 className={style.logo}>TRELLO</h1>
         </section>
     )
 }

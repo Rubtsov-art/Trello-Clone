@@ -1,4 +1,14 @@
 .header {
-    background-color: green;
+    background-color: #c5e1a5;
     min-height: 40px;
+    min-width: 100vw;
+    position: fixed;
+    z-index: 2;
+}
+
+.logo {
+    font-family: Roboto;
+    font-size: 24px;
+    line-height: 30px;
+    text-align: center;
 }
