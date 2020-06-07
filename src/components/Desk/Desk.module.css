@@ -46,6 +46,10 @@
     
 }
 
+.deskNameEdit:hover {
+    transform: scale(1.2)
+}
+
 .editSpan {
     font-size: 0;
 }

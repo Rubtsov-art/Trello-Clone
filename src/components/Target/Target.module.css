@@ -33,6 +33,10 @@
     align-self: center;
 }
 
+.targetNameEdit:hover {
+    transform: scale(1.2);
+}
+
 .editSpan {
     font-size: 0;
 }
@@ -48,6 +52,10 @@
     background-color: #ff6d00;
     cursor: pointer;
     align-self: center;
+}
+
+.deleteTarget:hover {
+    transform: scale(1.2);
 }
 
 .tasks {

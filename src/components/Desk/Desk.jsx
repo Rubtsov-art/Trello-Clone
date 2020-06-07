@@ -28,25 +28,46 @@ const Desk = (props) => {
     }
 
     return (
-        <section className={style.desk}>
+        <section  onDrop={(evt) => dropHandler(evt)} 
+                  onDragOver={(evt) => evt.preventDefault()} 
+                  className={style.desk}>
             {editMode 
             ?        <div class="row #e6ee9c lime lighten-3">
                         <div class="col s12">
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input onChange={onDeskNameChange} value={props.deskName} autoFocus={true} onBlur={editModeOff} type={"text"} id={"autocomplete-input"} class={"autocomplete"}/>
-                                    <label class='black-text' for="autocomplete-input">Desk name</label>
+                                    <input onChange={onDeskNameChange} 
+                                           value={props.deskName} 
+                                           autoFocus={true} 
+                                           onBlur={editModeOff} 
+                                           type={"text"} 
+                                           id={"autocomplete-input"} 
+                                           class={"autocomplete"}/>
+                                    <label class='black-text' 
+                                           for="autocomplete-input">
+                                        Desk name
+                                    </label>
                                 </div>
                             </div>
                         </div>
                     </div>
             : <div class='#e6ee9c lime lighten-3'>
                 <h1 className={style.deskName}>{props.deskName}</h1>
-                <button className={style.deskNameEdit} onClick={()=>{editModeOn()}} aria-label='edit'><span className={style.editSpan}>edit</span></button>
+                <button className={style.deskNameEdit} 
+                        onClick={()=>{editModeOn()}} 
+                        aria-label='edit'>
+                    <span className={style.editSpan}>
+                        edit
+                    </span>
+                </button>
               </div>}
             <li>
-                <button className={style.addTarget} onClick={() => { props.addTarget(props.deskId) }}><a class="waves-effect waves-light btn-small #558b2f light-green darken-3">add target</a></button>
-                <div onDrop={(evt) => dropHandler(evt)} onDragOver={(evt) => evt.preventDefault()}>
+                <button className={style.addTarget} 
+                        onClick={() => { props.addTarget(props.deskId) }}>
+                    <a class="waves-effect waves-light btn-small #558b2f light-green darken-3">
+                        add target
+                    </a>
+                </button>
                 <ul className={style.targets}>
                     {props.desks.map(d => {
                         return (
@@ -68,8 +89,12 @@ const Desk = (props) => {
                         )})
                     )})}
                 </ul>
-                </div>
-                <button className={style.deleteDesk} onClick={() => { props.deleteDesk(props.deskId) }}><a class="waves-effect waves-light btn-small #ff6d00 orange accent-4">delete desk</a></button>
+                <button className={style.deleteDesk} 
+                        onClick={() => { props.deleteDesk(props.deskId) }}>
+                    <a class="waves-effect waves-light btn-small #ff6d00 orange accent-4">
+                        delete desk
+                    </a>
+                </button>
             </li>
         </section>
     )
